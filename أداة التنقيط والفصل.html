@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أداة التنقيط والفصل</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap">
+<style>
+:root{--bg:#f3f4f7;--pn:#fff;--p2:#eef0f5;--tx:#161922;--mu:#6b7385;--bd:#dde1e9;--ac:#e0a800;--k1:#e4e7ee;--k2:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181c;--pn:#1c2126;--p2:#262c33;--tx:#e9ecf1;--mu:#8d96a5;--bd:#2d343c;--ac:#f5c518;--k1:#262c33;--k2:#1a1f24;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14181c;--pn:#1c2126;--p2:#262c33;--tx:#e9ecf1;--mu:#8d96a5;--bd:#2d343c;--ac:#f5c518;--k1:#262c33;--k2:#1a1f24;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Tajawal",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:14px}
+button,input,select{font:inherit;color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;flex-wrap:wrap}
+.lg{font-size:18px;font-weight:800}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.bt{border:1px solid var(--bd);background:var(--pn);border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:700}
+.bt.pr{background:var(--ac);border-color:var(--ac);color:#111}
+.bt:disabled{opacity:.45;cursor:not-allowed}
+.app{display:grid;grid-template-columns:272px minmax(0,1fr) 304px;gap:12px;padding:0 12px 16px;direction:ltr;align-items:start}
+.col{direction:rtl;max-height:calc(100vh - 70px);overflow:auto;padding-bottom:6px}
+.mid{direction:rtl;min-width:0}
+@media(max-width:980px){.app{grid-template-columns:1fr}.mid{order:-1}.col{max-height:none}}
+.pn{background:var(--pn);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:12px}
+.pn h3{margin:0 0 10px;font-size:14px;display:flex;align-items:center;gap:8px}
+.pn h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ac)}
+.pn h3 small{margin-inline-start:auto;color:var(--mu);font-weight:400}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button,.qp button{border:1px solid var(--bd);background:var(--p2);border-radius:8px;padding:5px 11px;cursor:pointer;font-size:13px}
+.seg button.on,.qp button:hover{border-color:var(--ac);color:var(--ac)}
+.wh{display:flex;gap:8px;align-items:center;margin:10px 0}
+.wh label{flex:1;display:flex;gap:6px;align-items:center;background:var(--p2);border:1px solid var(--bd);border-radius:8px;padding:4px 8px;color:var(--mu);direction:ltr}
+.wh input{width:100%;min-width:0;border:0;background:none;text-align:right;color:var(--tx)}
+.lk{border:1px solid var(--bd);background:var(--p2);border-radius:8px;width:34px;height:34px;cursor:pointer;opacity:.5}
+.lk.on{opacity:1;border-color:var(--ac)}
+.qp{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.sr{background:var(--p2);border-radius:10px;padding:9px 10px;margin-bottom:8px}
+.sh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sh output{background:var(--bg);border-radius:6px;padding:1px 9px;color:var(--ac);font-weight:700;direction:ltr}
+.sr input[type=range]{width:100%;accent-color:var(--ac);margin:6px 0 0}
+small{display:block;color:var(--mu);font-size:12px;line-height:1.5}
+.tr{display:flex;justify-content:space-between;align-items:center;background:var(--p2);border-radius:10px;padding:9px 10px;margin-bottom:8px;cursor:pointer}
+input.tg{appearance:none;-webkit-appearance:none;width:42px;height:24px;border-radius:99px;background:var(--bd);position:relative;cursor:pointer;margin:0;flex:none;transition:.15s}
+input.tg::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s}
+input.tg:checked{background:var(--ac)}
+input.tg:checked::after{inset-inline-start:21px}
+select,.nm input{background:var(--p2);border:1px solid var(--bd);border-radius:8px;padding:7px 8px;width:100%}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.nm{display:block;font-size:12px;color:var(--mu)}
+.pc{display:flex;gap:10px;align-items:center;width:100%;text-align:start;background:var(--p2);border:1px solid var(--bd);border-radius:10px;padding:7px;margin-bottom:7px;cursor:pointer}
+.pc.on{border-color:var(--ac)}
+.pc b{display:block;font-size:13px}
+.ic{flex:none;width:50px;height:44px;border-radius:7px;background:radial-gradient(circle,#fff 30%,transparent 33%) 0 0/8px 8px,#111}
+.ic.l{background:radial-gradient(circle,#111 30%,transparent 33%) 0 0/8px 8px,#fff}
+.ctr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.ctr{grid-template-columns:1fr}}
+.stg{position:relative;height:64vh;min-height:250px;overflow:auto;display:flex;border:1px solid var(--bd);border-radius:12px}
+.stg.ck{background-color:var(--k2);background-image:linear-gradient(45deg,var(--k1) 25%,transparent 25%,transparent 75%,var(--k1) 75%),linear-gradient(45deg,var(--k1) 25%,transparent 25%,transparent 75%,var(--k1) 75%);background-size:20px 20px;background-position:0 0,10px 10px}
+canvas{display:none;margin:auto;width:auto;height:auto;max-width:100%;max-height:100%}
+.tag{position:absolute;top:8px;inset-inline-start:8px;z-index:2;font-size:11px;letter-spacing:.5px;background:var(--pn);border:1px solid var(--bd);border-radius:99px;padding:2px 10px}
+.tag.y{background:var(--ac);color:#111;border-color:var(--ac)}
+.empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--mu);background:var(--pn);z-index:1}
+.tb{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.tb button{border:1px solid var(--bd);background:var(--pn);border-radius:8px;min-width:34px;height:34px;cursor:pointer;padding:0 10px}
+.tb button.on{border-color:var(--ac)}
+.tb input[type=color]{width:34px;height:34px;padding:0;border:1px solid var(--bd);border-radius:8px;background:none;cursor:pointer}
+#msg{text-align:center;color:var(--mu);font-size:13px;min-height:20px;margin-top:8px}
+#hist{width:100%;height:60px;background:var(--p2);border-radius:8px;display:block;margin-bottom:8px}
+.bsw{width:26px;height:26px;border-radius:7px;border:1px solid var(--bd);flex:none}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.row .bt{flex:1}
+.pal{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.cw{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--mu)}
+.chip{width:42px;height:42px;border-radius:10px;border:2px solid var(--bd);cursor:pointer;padding:0}
+.chip.off{opacity:.4;background-image:linear-gradient(135deg,transparent 44%,#f5c518 44%,#f5c518 56%,transparent 56%)}
+input.gr{appearance:none;-webkit-appearance:none;height:8px;border-radius:99px;outline:none}input.gr::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #0008;cursor:pointer}input.gr::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #0008}
+</style>
+</head>
+<body>
+<div class="top"><b class="lg">أداة التنقيط والفصل</b>
+<div class="acts"><button class="bt" id="up">رفع صورة</button><button class="bt" id="demo">صورة تجريبية</button><button class="bt pr" id="dl" disabled>تحميل PNG</button></div></div>
+<input type="file" id="file" accept="image/*" hidden>
+<div class="app">
+<aside class="col" id="L"></aside>
+<main class="mid">
+<div class="ctr">
+<div class="stg ck" id="sb"><span class="tag">قبل</span><canvas id="cb"></canvas><div class="empty" id="em">ارفع تصميم أو جرّب الصورة التجريبية</div></div>
+<div class="stg ck" id="sa"><span class="tag y">بعد</span><canvas id="ca"></canvas></div>
+</div>
+<div class="tb"><button id="zo">−</button><b id="zp" style="min-width:48px;text-align:center">100%</b><button id="zi">+</button><button id="zf">ملاءمة</button><button id="z1">1:1</button><span style="width:10px"></span><button id="b1" title="شطرنجي">▦</button><button id="b2" style="background:#fff;color:#111">أبيض</button><button id="b3" style="background:#000;color:#fff">أسود</button><input type="color" id="shc" value="#111111" title="لون التيشيرت"></div>
+<div id="msg"></div>
+</main>
+<aside class="col" id="Rt"></aside>
+</div>
+<script>
+const $=i=>document.getElementById(i),V=i=>+$(i).value,C=i=>$(i).checked;
+const S={src:null,orig:null,w:0,h:0,bg:[255,255,255],pick:false,shirt:'#111111',bgm:'shirt',z:0,u:'cm',lock:true,inW:10,inH:10,pal:null,pc:[],rem:new Set(),hs:null};
+const UP={mm:25.4,cm:2.54,m:.0254,in:1};
+let colorC,whiteC,pend=false;
+const R=(id,l,a,b,s,v,h)=>`<div class=sr><div class=sh><span>${l}</span><output id=${id}v>${s<1?(+v).toFixed(2):v}</output></div><input type=range id=${id} min=${a} max=${b} step=${s} value=${v}>${h?`<small>${h}</small>`:''}</div>`;
+const T=(id,l,on)=>`<label class=tr><span>${l}</span><input type=checkbox class=tg id=${id}${on?' checked':''}></label>`;
+const N=(id,l,a,b,s,v)=>`<label class=nm>${l}<input type=number id=${id} min=${a} max=${b} step=${s} value=${v}></label>`;
+$('L').innerHTML=`<div class=pn><h3>الحجم النهائي <small id=dpil>300 DPI</small></h3>
+<div class=seg id=units>${['mm','cm','m','in','px'].map(u=>`<button data-u=${u}${u==='cm'?' class=on':''}>${u}</button>`).join('')}</div>
+<div class=wh><label>W<input type=number id=iw step=any value=10></label><button class="lk on" id=lk title="ربط النسبة">🔗</button><label>H<input type=number id=ih step=any value=10></label></div>
+<div class=qp><button data-p=o>الأصلي</button><button data-p=c>صدر أيسر</button><button data-p=f>أمامي كامل</button><button data-p=b>خلفي كامل</button></div>
+<small id=szi>ارفع صورة لحساب الحجم</small></div>
+<div class="pn fx"><h3>الإضاءة والظلال</h3>${T('ht','تفعيل التنقيط',1)}${R('cut','حد اختفاء الظلال',0,1,.01,.12,'تحت هذي الدرجة ما يبقى حبر')}${R('soft','نعومة القطع',0,1,.01,.1,'النقطة تصغر تدريجياً لين تختفي')}${T('lift','رفع الظلال قبل التنقيط',0)}${R('ed','نعومة الحواف %',0,100,1,0,'تخفيف النقاط عند حافة التصميم')}${R('cell','حجم النقطة',3,16,1,5)}${R('ang','زاوية الشبكة',0,90,1,45)}${R('cden','كثافة الحبر %',10,100,1,100)}</div>
+<div class=pn><h3>الإخراج</h3><label class=nm>الدقة<select id=dpi><option>150</option><option selected>300</option><option>600</option></select></label><small style="margin-top:8px">الصيغة: PNG شفاف مع تضمين الدقة داخل الملف</small></div>`;
+$('Rt').innerHTML=`<div class=pn><h3>كيف راح تطبع</h3>
+<button class="pc on" data-k=dd><i class=ic></i><span><b>داكن · تفاصيل</b><small>تيشيرت داكن، يطبع المناطق الفاتحة، تفاصيل أكثر وحبر أكثر</small></span></button>
+<button class=pc data-k=do><i class=ic></i><span><b>داكن · مفتوح</b><small>تيشيرت داكن، نقاط متباعدة، حبر أقل</small></span></button>
+<button class=pc data-k=ld><i class="ic l"></i><span><b>فاتح · تفاصيل</b><small>تيشيرت فاتح، يطبع المناطق الداكنة، تفاصيل أكثر</small></span></button>
+<button class=pc data-k=lo><i class="ic l"></i><span><b>فاتح · مفتوح</b><small>تيشيرت فاتح، نقاط متباعدة، حبر أقل</small></span></button>
+<div class=fx><div class=row><span class=bsw id=bsw></span><button class=bt id=ey>قطارة: لون يختفي</button></div>${T('rm','إزالة اللون المحدد',1)}${R('tol','التسامح',0,200,1,45)}${R('fea','نعومة القطع (حواف)',0,100,1,30)}</div>
+<small>تلقائياً يؤخذ لون زوايا الصورة. الظلال الداكنة (تيشيرت داكن) أو الفاتحة (تيشيرت فاتح) تختفي بإعدادات الإضاءة.</small>
+<div class=row style="margin-top:8px"><button class=bt id=rs>إعادة ضبط</button></div></div>
+<div class="pn fx"><h3>Levels <small>مستويات الإدخال</small></h3><canvas id=hist width=270 height=60 style="display:block"></canvas>
+<div class=g3>${N('lb','أسود',0,254,1,0)}${N('gm','جاما',.1,3,.01,1)}${N('lw','أبيض',1,255,1,255)}</div>
+<div class=g2 style="margin:8px 0">${N('ob','إخراج أسود',0,255,1,0)}${N('ow','إخراج أبيض',0,255,1,255)}</div>${T('inv','عكس: يطبع المناطق الداكنة',0)}</div>
+<div class="pn fx"><h3>الطبقة البيضاء</h3>${T('ub','Underbase',1)}<label class=nm>الانكماش (Choke)<select id=ch><option value=0>0 px</option><option value=1 selected>1 px</option><option value=2>2 px</option><option value=3>3 px</option></select></label><div style="height:8px"></div>${T('pub','معاينة الطبقة البيضاء',1)}<button class=bt id=exw style="width:100%" disabled>تصدير الطبقة البيضاء</button></div>
+<div class="pn fx"><h3>فصل الألوان</h3>${T('qz','تفعيل فصل الألوان',0)}${R('nc','عدد الألوان',2,16,1,6)}${T('flat','توحيد الألوان (شبه فكتور)',1)}${R('sm','تنعيم الحواف px',0,6,1,1)}<button class=bt id=an style="width:100%">تحليل الألوان</button><div class=pal id=pal></div><small style="margin-top:6px">اضغط على لون لحذفه، ومرة ثانية لإرجاعه.</small></div>`;
+const DEF={};document.querySelectorAll('.fx input,.fx select').forEach(e=>DEF[e.id]=e.type==='checkbox'?e.checked:e.value);
+function setv(id,v){const e=$(id);e.value=v;const o=$(id+'v');if(o)o.textContent=+e.step<1?(+v).toFixed(2):v;}
+const PR={dd:[0,'#111111',4,100],do:[0,'#111111',8,85],ld:[1,'#ffffff',4,100],lo:[1,'#ffffff',8,85]};
+function preset(k){const p=PR[k];$('inv').checked=!!p[0];setv('cell',p[2]);setv('cden',p[3]);setShirt(p[1]);S.bgm='shirt';document.querySelectorAll('.pc').forEach(b=>b.classList.toggle('on',b.dataset.k===k));sched();}
+function setShirt(c){S.shirt=c;$('shc').value=c;bgA();}
+document.querySelectorAll('.pc').forEach(b=>b.onclick=()=>preset(b.dataset.k));
+$('rs').onclick=()=>{for(const id in DEF){const e=$(id);if(e.type==='checkbox')e.checked=DEF[id];else setv(id,DEF[id]);}preset('dd');};
+document.addEventListener('input',e=>{const t=e.target;
+ if(t.type==='range'){const o=$(t.id+'v');if(o)o.textContent=+t.step<1?(+t.value).toFixed(2):t.value;}
+ if(t.id==='iw'||t.id==='ih'){if(!S.orig)return;const f=fct();if(t.id==='iw'){S.inW=(+t.value||1)/f;if(S.lock)S.inH=S.inW*S.orig.height/S.orig.width;}else{S.inH=(+t.value||1)/f;if(S.lock)S.inW=S.inH*S.orig.width/S.orig.height;}disp(t.id);return;}
+ if(t.id==='dpi'){disp();return;}
+ if(t.closest('.fx')){if(t.id==='qz'&&t.checked&&!S.pal){analyze();return;}if(t.id==='nc')return;document.querySelectorAll('.pc').forEach(b=>b.classList.remove('on'));sched();}});
+document.addEventListener('change',e=>{if(e.target.id==='nc'&&C('qz'))analyze();});
+const fct=()=>S.u==='px'?V('dpi'):UP[S.u];
+function disp(ex){const f=fct(),dg=S.u==='px'?0:S.u==='m'?3:S.u==='mm'?1:2;if(ex!=='iw')$('iw').value=(S.inW*f).toFixed(dg);if(ex!=='ih')$('ih').value=(S.inH*f).toFixed(dg);tinfo();}
+function tgt(){const dpi=V('dpi');let tw=Math.max(1,Math.round(S.inW*dpi)),th=Math.max(1,Math.round(S.inH*dpi)),ef=dpi;const M=24e6;if(tw*th>M){const f=Math.sqrt(M/(tw*th));tw=Math.round(tw*f);th=Math.round(th*f);ef=Math.round(dpi*f);}return{tw,th,ef};}
+function tinfo(){$('dpil').textContent=V('dpi')+' DPI';if(!S.orig)return;const s=tgt();$('szi').textContent=s.tw+' × '+s.th+' px'+(s.ef<V('dpi')?' · الدقة الفعلية '+s.ef+' DPI (حد الذاكرة)':'');}
+$('units').onclick=e=>{const u=e.target.dataset.u;if(!u)return;S.u=u;[...$('units').children].forEach(b=>b.classList.toggle('on',b===e.target));disp();};
+$('lk').onclick=()=>{S.lock=!S.lock;$('lk').classList.toggle('on',S.lock);};
+document.querySelectorAll('.qp button').forEach(b=>b.onclick=()=>{if(!S.orig)return;const p=b.dataset.p;S.inW=p==='o'?S.orig.width/V('dpi'):p==='c'?10/2.54:p==='f'?30/2.54:35/2.54;S.inH=S.inW*S.orig.height/S.orig.width;disp();});
+$('up').onclick=()=>$('file').click();
+$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>load(im);im.src=URL.createObjectURL(f);};
+$('demo').onclick=()=>{const c=document.createElement('canvas');c.width=c.height=1200;const x=c.getContext('2d');x.fillStyle='#f1e7d4';x.fillRect(0,0,1200,1200);
+ const g=x.createRadialGradient(600,560,40,600,560,430);g.addColorStop(0,'#ffd36b');g.addColorStop(.5,'#2aa7b8');g.addColorStop(1,'#10202a');x.fillStyle=g;x.beginPath();x.arc(600,560,430,0,6.2832);x.fill();
+ x.font='800 230px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillStyle='#b8404f';x.fillText('Monaco',600,900);load(c);};
+function msg(t){$('msg').textContent=t;}
+function load(im){const M=1400,sc=Math.min(1,M/Math.max(im.width,im.height)),w=Math.round(im.width*sc),h=Math.round(im.height*sc),c=document.createElement('canvas');c.width=w;c.height=h;
+ const x=c.getContext('2d');x.drawImage(im,0,0,w,h);S.src=c;S.orig=im;S.w=w;S.h=h;
+ const px=[[0,0],[w-1,0],[0,h-1],[w-1,h-1]].map(p=>x.getImageData(p[0],p[1],1,1).data),tr=px.some(p=>p[3]<250);
+ S.bg=[0,1,2].map(k=>Math.round(px.reduce((s,p)=>s+p[k],0)/4));$('bsw').style.background='rgb('+S.bg+')';$('rm').checked=!tr;
+ const dd=x.getImageData(0,0,w,h).data,hs=new Array(256).fill(0);for(let i=0;i<w*h;i++)if(dd[i*4+3]>128)hs[Math.round(.299*dd[i*4]+.587*dd[i*4+1]+.114*dd[i*4+2])]++;S.hs=hs;
+ S.pal=null;S.rem=new Set();$('pal').innerHTML='';S.z=0;
+ $('em').style.display='none';$('cb').style.display=$('ca').style.display='block';$('dl').disabled=$('exw').disabled=false;
+ S.inW=im.width/V('dpi');S.inH=S.inW*im.height/im.width;disp();msg(tr?'الصورة فيها شفافية أصلاً، فتم إيقاف إزالة اللون.':'');
+ if(C('qz'))analyze();sched();}
+function sched(){if(pend||!S.src)return;pend=true;requestAnimationFrame(()=>{pend=false;process();});}
+function pass(a,w,h,r,mode){const t=new Float32Array(a.length),o=new Float32Array(a.length),n=2*r+1;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){let m=mode?1:0;for(let k=-r;k<=r;k++){const xx=Math.min(w-1,Math.max(0,x+k)),v=a[y*w+xx];if(mode){if(v<m)m=v;}else m+=v;}t[y*w+x]=mode?m:m/n;}
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){let m=mode?1:0;for(let k=-r;k<=r;k++){const yy=Math.min(h-1,Math.max(0,y+k)),v=t[yy*w+x];if(mode){if(v<m)m=v;}else m+=v;}o[y*w+x]=mode?m:m/n;}
+ return o;}
+function halftone(W,w,h,cell,ang){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#000';
+ const t=ang*Math.PI/180,cs=Math.cos(t),sn=Math.sin(t),R2=Math.hypot(w,h);
+ for(let gy=-R2/2;gy<R2/2;gy+=cell)for(let gx=-R2/2;gx<R2/2;gx+=cell){const px=w/2+gx*cs-gy*sn,py=h/2+gx*sn+gy*cs;
+  if(px<0||py<0||px>=w||py>=h)continue;const v=W[(py|0)*w+(px|0)];if(v<.02)continue;
+  x.beginPath();x.arc(px,py,cell*(v<.785?Math.sqrt(v/Math.PI):.5+(v-.785)/.215*.2071),0,6.2832);x.fill();}
+ const d=x.getImageData(0,0,w,h).data,o=new Float32Array(w*h);for(let i=0;i<o.length;i++)o[i]=d[i*4+3]/255;return o;}
+function tone(A,oc,w,h,k){const n=w*h,B=new Float32Array(n),den=V('cden')/100,cut=V('cut'),so=V('soft'),lb=V('lb')/255,lw=Math.max(V('lw')/255,lb+.004),gm=Math.max(.1,V('gm')),ob=V('ob')/255,ow=V('ow')/255,inv=C('inv'),lf=C('lift'),ed=V('ed');
+ const Ab=ed>0?pass(A,w,h,Math.max(1,Math.round(ed/100*14*k)),0):null;
+ for(let i=0;i<n;i++){const a=A[i];if(a<=.003)continue;
+  const l=(.299*oc.data[i*4]+.587*oc.data[i*4+1]+.114*oc.data[i*4+2])/255;
+  let t=(l-lb)/(lw-lb);t=t<0?0:t>1?1:t;t=Math.pow(t,1/gm);if(inv)t=1-t;if(lf)t=Math.pow(t,.6);
+  let r=so>0?(t-cut)/so:(t>cut?1:0);r=r<0?0:r>1?1:r;r=r*r*(3-2*r);
+  t=ob+t*(ow-ob);let v=a*den*t*r;
+  if(Ab){let e=(Ab[i]-.5)*2;e=e<0?0:e>1?1:e;v*=e;}
+  B[i]=v;}
+ const H=halftone(B,w,h,V('cell')*k,V('ang'));for(let i=0;i<n;i++){A[i]=H[i];oc.data[i*4+3]=Math.round(H[i]*255);}}
+const mk=(id,w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').putImageData(id,0,0);return c;};
+function core(src,k){const w=src.width,h=src.height,n=w*h,d=src.getContext('2d').getImageData(0,0,w,h).data,A=new Float32Array(n),oc=new ImageData(w,h),rm=C('rm'),tol=V('tol'),fe=V('fea')+1,[br,bg,bb]=S.bg;
+ for(let i=0;i<n;i++){let a=d[i*4+3]/255;
+  if(rm){const x=d[i*4]-br,y=d[i*4+1]-bg,z=d[i*4+2]-bb;let t=(Math.sqrt(x*x+y*y+z*z)-tol)/fe;t=t<0?0:t>1?1:t;a*=t*t*(3-2*t);}
+  A[i]=a;oc.data[i*4]=d[i*4];oc.data[i*4+1]=d[i*4+1];oc.data[i*4+2]=d[i*4+2];oc.data[i*4+3]=Math.round(a*255);}
+ if(QZ())quant(d,A,oc,w,h,k);
+ adj(oc,w,h);if(C('ht'))tone(A,oc,w,h,k);
+ let W=new Float32Array(n);
+ if(C('ub')){for(let i=0;i<n;i++){const v=(A[i]-.1)/.9;W[i]=v<0?0:v>1?1:v;}const ch=Math.round(V('ch')*k);if(ch>0)W=pass(W,w,h,ch,1);}
+ const ow=new ImageData(w,h);for(let i=0;i<n;i++){ow.data[i*4]=ow.data[i*4+1]=ow.data[i*4+2]=255;ow.data[i*4+3]=Math.round(W[i]*255);}
+ return{cc:mk(oc,w,h),wc:mk(ow,w,h),W};}
+function process(){const r=core(S.src,1);colorC=r.cc;whiteC=r.wc;render();}
+function bgA(){[$('sb'),$('sa')].forEach(p=>{if(S.bgm==='checker'){p.classList.add('ck');p.style.background='';}else{p.classList.remove('ck');p.style.background=S.bgm==='shirt'?S.shirt:S.bgm;}});}
+function render(){if(!colorC)return;const b=$('cb'),a=$('ca');b.width=a.width=S.w;b.height=a.height=S.h;b.getContext('2d').drawImage(S.src,0,0);
+ const x=a.getContext('2d');if(C('ub')&&C('pub'))x.drawImage(whiteC,0,0);x.drawImage(colorC,0,0);bgA();az();hist();}
+function az(){['cb','ca'].forEach(i=>{const c=$(i);if(S.z){c.style.width=S.w*S.z+'px';c.style.maxWidth='none';c.style.maxHeight='none';}else{c.style.width='';c.style.maxWidth='100%';c.style.maxHeight='100%';}});$('zp').textContent=Math.round((S.z||($('ca').clientWidth/S.w)||1)*100)+'%';}
+const cur=()=>S.z||($('ca').clientWidth/S.w)||1;
+$('zi').onclick=()=>{if(!S.src)return;S.z=Math.min(4,cur()*1.25);az();};
+$('zo').onclick=()=>{if(!S.src)return;S.z=Math.max(.05,cur()/1.25);az();};
+$('zf').onclick=()=>{S.z=0;az();};$('z1').onclick=()=>{if(S.src){S.z=1;az();}};
+$('b1').onclick=()=>{S.bgm='checker';bgA();};$('b2').onclick=()=>{S.bgm='#ffffff';bgA();};$('b3').onclick=()=>{S.bgm='#000000';bgA();};
+$('shc').oninput=e=>{S.shirt=e.target.value;S.bgm='shirt';bgA();};
+function hist(){const c=$('hist'),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);if(!S.hs)return;const mx=Math.sqrt(Math.max(...S.hs,1));x.fillStyle='#7d8795';S.hs.forEach((v,i)=>{const hh=Math.sqrt(v)/mx*(H-4);x.fillRect(i/256*W,H-hh,W/256+.5,hh);});x.fillStyle='#f5c518';[V('lb'),V('lw')].forEach(v=>x.fillRect(v/255*W-1,0,2,H));}
+$('ey').onclick=()=>{if(!S.src)return;S.pick=true;$('cb').style.cursor=$('ca').style.cursor='crosshair';msg('اضغط على اللون اللي تبيه يختفي داخل الصورة');};
+['cb','ca'].forEach(i=>$(i).onclick=e=>{if(!S.pick)return;const r=e.target.getBoundingClientRect(),x=Math.min(S.w-1,Math.max(0,Math.floor((e.clientX-r.left)/r.width*S.w))),y=Math.min(S.h-1,Math.max(0,Math.floor((e.clientY-r.top)/r.height*S.h))),p=S.src.getContext('2d').getImageData(x,y,1,1).data;
+ S.bg=[p[0],p[1],p[2]];S.pick=false;$('cb').style.cursor=$('ca').style.cursor='';$('bsw').style.background='rgb('+S.bg+')';$('rm').checked=true;msg('');sched();});
+function QZ(){return C('qz')&&S.pal&&S.pal.length>0}
+function pals(){const p=$('pal');p.innerHTML='';S.pal.forEach((c,j)=>{const w=document.createElement('div');w.className='cw';const b=document.createElement('button');b.className='chip'+(S.rem.has(j)?' off':'');b.style.backgroundColor='rgb('+c+')';b.onclick=()=>{S.rem.has(j)?S.rem.delete(j):S.rem.add(j);pals();sched();};const t=document.createElement('span');t.textContent=S.pc[j]+'%';w.appendChild(b);w.appendChild(t);p.appendChild(w);});}
+$('an').onclick=()=>{$('qz').checked=true;analyze();};
+function analyze(){if(!S.src)return;const d=S.src.getContext('2d').getImageData(0,0,S.w,S.h).data,n=S.w*S.h,rm=C('rm'),lim=V('tol')+V('fea')*.5,[br,bg,bb]=S.bg,st=Math.max(1,Math.floor(n/40000)),px=[];
+ for(let i=0;i<n;i+=st){if(d[i*4+3]<200)continue;const r=d[i*4],g=d[i*4+1],b=d[i*4+2];if(rm){const x=r-br,y=g-bg,z=b-bb;if(Math.sqrt(x*x+y*y+z*z)<lim)continue;}px.push([r,g,b]);}
+ const K=Math.min(V('nc'),px.length);if(!K){msg('ما لقيت ألوان للتحليل.');return;}
+ const dist=(a,b)=>{const x=a[0]-b[0],y=a[1]-b[1],z=a[2]-b[2];return x*x+y*y+z*z};
+ let m=[0,0,0];px.forEach(p=>{m[0]+=p[0];m[1]+=p[1];m[2]+=p[2]});m=m.map(v=>v/px.length);
+ let c=[px.reduce((a,p)=>dist(p,m)<dist(a,m)?p:a).slice()];const md=px.map(p=>dist(p,c[0]));
+ while(c.length<K){let bi=0;for(let i=1;i<px.length;i++)if(md[i]>md[bi])bi=i;c.push(px[bi].slice());for(let i=0;i<px.length;i++){const e=dist(px[i],px[bi]);if(e<md[i])md[i]=e;}}
+ let cnt=new Array(K).fill(0);
+ for(let it=0;it<8;it++){const s=c.map(()=>[0,0,0,0]);px.forEach(p=>{let b=0,bd=1e9;for(let j=0;j<K;j++){const e=dist(p,c[j]);if(e<bd){bd=e;b=j;}}s[b][0]+=p[0];s[b][1]+=p[1];s[b][2]+=p[2];s[b][3]++;});
+  c=c.map((q,j)=>s[j][3]?[s[j][0]/s[j][3],s[j][1]/s[j][3],s[j][2]/s[j][3]]:q);cnt=s.map(v=>v[3]);}
+ const o=c.map((q,j)=>({q:q.map(Math.round),n:cnt[j]})).filter(v=>v.n>0).sort((a,b)=>b.n-a.n),tot=px.length;
+ S.pal=o.map(v=>v.q);S.pc=o.map(v=>Math.max(1,Math.round(v.n/tot*100)));S.rem=new Set();msg('');pals();sched();}
+function quant(d,A,oc,w,h,k){const P=S.pal,K=P.length,n=w*h,ra=P.map((_,j)=>S.rem.has(j)?0:1),flat=C('flat'),sm=Math.round(V('sm')*k);
+ let M=new Float32Array(n);const lab=new Uint8Array(n);
+ for(let i=0;i<n;i++){if(A[i]<=.003)continue;const r=d[i*4],g=d[i*4+1],bl=d[i*4+2];let b=0,bd=1e9;
+  for(let j=0;j<K;j++){const p=P[j],x=r-p[0],y=g-p[1],z=bl-p[2],e=x*x+y*y+z*z;if(e<bd){bd=e;b=j;}}
+  lab[i]=b;M[i]=ra[b];}
+ if(sm>0){M=pass(M,w,h,sm,0);for(let i=0;i<n;i++){let t=(M[i]-.3)/.4;t=t<0?0:t>1?1:t;M[i]=t*t*(3-2*t);}}
+ for(let i=0;i<n;i++){if(A[i]<=.003)continue;A[i]*=M[i];if(flat){const p=P[lab[i]];oc.data[i*4]=p[0];oc.data[i*4+1]=p[1];oc.data[i*4+2]=p[2];}oc.data[i*4+3]=Math.round(A[i]*255);}}
+function step(c,w,h){const o=document.createElement('canvas');o.width=w;o.height=h;const x=o.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(c,0,0,w,h);return o;}
+function resize(src,tw,th){let c=src,w=src.width,h=src.height;
+ while(w*2<tw||h*2<th){w*=2;h*=2;c=step(c,w,h);}
+ while(w/2>tw&&h/2>th){w=Math.round(w/2);h=Math.round(h/2);c=step(c,w,h);}
+ return step(c,tw,th);}
+const toBlob=c=>new Promise(r=>c.toBlob(r,'image/png'));
+const CT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc(b){let c=-1;for(let i=0;i<b.length;i++)c=CT[(c^b[i])&255]^(c>>>8);return(c^-1)>>>0}
+async function dpiBlob(cv,dpi){const b=await toBlob(cv),u=new Uint8Array(await b.arrayBuffer()),ppm=Math.round(dpi/0.0254),d=new Uint8Array(21),dv=new DataView(d.buffer);
+ dv.setUint32(0,9);d.set([112,72,89,115],4);dv.setUint32(8,ppm);dv.setUint32(12,ppm);d[16]=1;dv.setUint32(17,crc(d.subarray(4,17)));
+ return new Blob([u.subarray(0,33),d,u.subarray(33)],{type:'image/png'});}
+async function save(name,blob){const d=window.claude?await window.claude.use('downloads'):null;
+ if(!d){msg('الحفظ غير متاح في هذا العرض.');return;}
+ try{await d.save({filename:name,data:blob});msg('');}catch(e){if(!e||e.code!=='declined')msg('تعذّر الحفظ، حاول مرة ثانية.');}}
+async function job(kind){if(!S.orig)return;if(kind===2&&!C('ub')){msg('فعّل Underbase أولاً.');return;}const s=tgt();msg('جاري المعالجة بحجم الطباعة، لحظات…');await new Promise(r=>setTimeout(r,40));
+ try{const r=core(resize(S.orig,s.tw,s.th),s.tw/S.w),tag=s.tw+'x'+s.th;let cv,nm;
+  if(kind===1){cv=r.cc;nm='print-'+tag+'.png';}
+  else{cv=document.createElement('canvas');cv.width=s.tw;cv.height=s.th;const id=new ImageData(s.tw,s.th);for(let i=0;i<r.W.length;i++)id.data[i*4+3]=Math.round(r.W[i]*255);cv.getContext('2d').putImageData(id,0,0);nm='white-'+tag+'.png';}
+  const b=await dpiBlob(cv,s.ef);msg('');await save(nm,b);
+ }catch(e){msg('تعذّرت المعالجة بهذا الحجم، جرّب حجم أصغر.');}}
+$('dl').onclick=()=>job(1);$('exw').onclick=()=>job(2);
+bgA();hist();
+function adjOn(){return V('sat')||V('vib')||V('lgt')||V('cnt')||V('hue');}
+function adj(oc,w,h){if(!adjOn())return;const d=oc.data,sa=1+V('sat')/100,vb=V('vib')/100,lt=V('lgt')/100,ct=1+V('cnt')/100,hu=V('hue')*Math.PI/180,cs=Math.cos(hu),sn=Math.sin(hu),
+ m=[.213+cs*.787-sn*.213,.715-cs*.715-sn*.715,.072-cs*.072+sn*.928,.213-cs*.213+sn*.143,.715+cs*.285+sn*.14,.072-cs*.072-sn*.283,.213-cs*.213-sn*.787,.715-cs*.715+sn*.715,.072+cs*.928+sn*.072],n=w*h;
+ for(let i=0;i<n;i++){const o=i*4;if(d[o+3]===0)continue;let r=d[o],g=d[o+1],b=d[o+2];
+  if(hu){const nr=m[0]*r+m[1]*g+m[2]*b,ng=m[3]*r+m[4]*g+m[5]*b,nb=m[6]*r+m[7]*g+m[8]*b;r=nr;g=ng;b=nb;}
+  const y=.299*r+.587*g+.114*b,mx=Math.max(r,g,b),mn=Math.min(r,g,b),s0=mx>0?(mx-mn)/mx:0,f=sa*(1+vb*(1-s0));
+  r=y+(r-y)*f;g=y+(g-y)*f;b=y+(b-y)*f;
+  if(lt>0){r+=(255-r)*lt;g+=(255-g)*lt;b+=(255-b)*lt;}else{r*=1+lt;g*=1+lt;b*=1+lt;}
+  d[o]=(r-128)*ct+128;d[o+1]=(g-128)*ct+128;d[o+2]=(b-128)*ct+128;}}
+(function(){const d=document.createElement('div');d.className='pn fx';
+d.innerHTML=`<h3>التشبّع والألوان <small id=svs>SAT 0 · VIB 0</small></h3><div class=seg id=sps>${[['o','الأصلي'],['d','تصحيح DTF'],['w','تصميم باهت'],['n','نيون · أنمي'],['s','بشرة طبيعية'],['b','أبيض وأسود']].map(p=>`<button data-s=${p[0]}>${p[1]}</button>`).join('')}</div><button class=bt id=aut style='width:100%;margin:8px 0'>ضبط تلقائي حسب التصميم</button>`+R('sat','التشبّع',-100,100,1,0)+R('vib','الحيوية (Vibrance)',-100,100,1,0)+R('lgt','الإضاءة',-100,100,1,0)+R('cnt','التباين',-100,100,1,0)+R('hue','درجة اللون (Hue)',-180,180,1,0);
+$('hist').closest('.pn').insertAdjacentElement('afterend',d);
+const GR={sat:'linear-gradient(90deg,#808080,#c9a227,#22c55e,#3b82f6,#a855f7)',vib:'linear-gradient(90deg,#808080,#22c55e)',lgt:'linear-gradient(90deg,#000,#fff)',cnt:'linear-gradient(90deg,#444,#bbb)',hue:'linear-gradient(90deg,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00)'};
+const ids=['sat','vib','lgt','cnt','hue'];ids.forEach(id=>{const e=$(id);e.classList.add('gr');e.style.background=GR[id];DEF[id]='0';});
+const sum=()=>{$('svs').textContent='SAT '+V('sat')+' · VIB '+V('vib');};
+const sset=a=>{ids.forEach((id,i)=>setv(id,a[i]));sum();sched();};
+d.addEventListener('input',sum);
+const SP={o:[0,0,0,0,0],d:[18,15,0,8,0],w:[25,30,-8,25,0],n:[45,35,5,20,0],s:[-5,18,4,5,0],b:[-100,0,0,0,0]};
+$('sps').onclick=e=>{const k=e.target.dataset.s;if(k)sset(SP[k]);};
+$('aut').onclick=()=>{if(!S.src)return;const x=S.src.getContext('2d').getImageData(0,0,S.w,S.h).data,n=S.w*S.h;let ss=0,ls=0,l2=0,c=0;
+ for(let i=0;i<n;i+=3){if(x[i*4+3]<128)continue;const r=x[i*4],g=x[i*4+1],b=x[i*4+2],mx=Math.max(r,g,b),mn=Math.min(r,g,b),y=.299*r+.587*g+.114*b;ss+=mx?(mx-mn)/mx:0;ls+=y;l2+=y*y;c++;}
+ if(!c)return;const as=ss/c,lm=ls/c,sd=Math.sqrt(Math.max(0,l2/c-lm*lm)),cp=(v,a,b)=>Math.round(Math.max(a,Math.min(b,v))),sa=cp((.5-as)*90,-20,50);
+ sset([sa,cp(sa*.6,-20,35),cp((125-lm)*.25,-25,25),cp((64-sd)*.6,-10,40),0]);};})();
+</script>
+</body>
+</html>
